@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1835462977727249999}
   - component: {fileID: 8428086673799866840}
   m_Layer: 0
-  m_Name: Fire
+  m_Name: BulletPref
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

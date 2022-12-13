@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 using static Unity.VisualScripting.Member;
 
 [RequireComponent(typeof(CharacterController))]
@@ -21,22 +22,12 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        moveInput = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
-        moveInput = Vector3.ClampMagnitude(moveInput, 1f);
+        moveInput = Vector3.ClampMagnitude(new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical")), 1f);
 
-        if ((Input.GetKey(KeyCode.W) && Input.GetMouseButton(2)) ||
-            (Input.GetKey(KeyCode.A) && Input.GetMouseButton(2)) ||
-            (Input.GetKey(KeyCode.S) && Input.GetMouseButton(2)) ||
-            (Input.GetKey(KeyCode.D) && Input.GetMouseButton(2)))
-        {
-            moveInput = transform.TransformDirection(moveInput) * runSpeed;
-        }
-        else
-        {
-            moveInput = transform.TransformDirection(moveInput) * walkSpeed;
-        }
+        moveInput = transform.TransformDirection(moveInput) * (Input.GetMouseButton(2) ? runSpeed : walkSpeed);
 
-        moveInput.y += -20f * Time.deltaTime;
+        moveInput.x += Time.deltaTime;
+        if (Input.GetAxis("Jump") <= 0) {moveInput.y = 0f;}
         characterController.Move(moveInput * Time.deltaTime);
     }
 }

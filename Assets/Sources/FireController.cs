@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fire : MonoBehaviour
+public class FireController : MonoBehaviour
 {
     //Agregan punto de inicio de donde la bala saldra.
     public GameObject BalaPrefab;
